@@ -1,0 +1,15 @@
+
+body {
+    /* Space out content a bit */
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* customize container to be narrow by default */
+/*
+@media (min-width: 768px) {
+    .container {
+        max-width: 730px;
+    }
+}
+*/
