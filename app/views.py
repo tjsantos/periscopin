@@ -1,7 +1,8 @@
-from flask import render_template
 from app import app, socketio
+from flask import render_template
 
 from threading import Thread
+from datetime import datetime
 import time
 
 @app.route('/')
@@ -18,6 +19,7 @@ def on_disconnect():
     stream_manager.new_disconnect()
     print('user disconnected ({})'.format(stream_manager.users))
 
+
 class StreamManager:
 
     def __init__(self):
@@ -26,7 +28,17 @@ class StreamManager:
 
     def _stream(self):
         while self.running:
-            print(time.time())
+            now = datetime.now().isoformat()
+            print(now)
+            data = {
+                'name': 'name', 'screen_name': 'screen_name', 'created_at': now,
+                'location': {
+                    'city': 'city',
+                    'country': 'country'
+                },
+                'status': 'status',
+            }
+            socketio.emit('new stream', data, namespace='/main')
             time.sleep(2)
 
     def start_stream(self):

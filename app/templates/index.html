@@ -26,6 +26,7 @@
   <body>
     <div class="container">
       <h1>hello world</h1>
+      <div id="log"></div>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -39,6 +40,31 @@
       $(document).ready(function() {
           namespace = '/main';
           var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
+          socket.on('new stream', function(data) {
+            $('#log').prepend('<p class="time" data-time="' + data.created_at + '">asdf</p>');
+          });
+
+          function timeSince(dateString) {
+              var then = new Date(dateString);
+              var seconds = (Date.now() - then) / 1000;
+              if (seconds < 60) {
+                  return parseInt(seconds) + 's';
+              } else if (seconds < 3600) {
+                  return parseInt(seconds/60) + 'm';
+              } else if (seconds < 86400) {
+                  return parseInt(seconds/3600) + 'h';
+              } else {
+                  return parseInt(seconds/86400) + 'd';
+              }
+          }
+
+          function updateTime() {
+              $('.time').each(function() {
+                  $(this).text(timeSince($(this).data("time")));
+              });
+          }
+
+          setInterval(updateTime, 30000);
       });
     </script>
   </body>
