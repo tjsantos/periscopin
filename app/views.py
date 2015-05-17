@@ -12,12 +12,10 @@ def index():
 @socketio.on('connect', namespace='/main')
 def on_connect():
     stream_manager.new_connection()
-    print('user connected ({})'.format(stream_manager.users))
 
 @socketio.on('disconnect', namespace='/main')
 def on_disconnect():
     stream_manager.new_disconnect()
-    print('user disconnected ({})'.format(stream_manager.users))
 
 
 class StreamManager:
@@ -29,7 +27,7 @@ class StreamManager:
     def _stream(self):
         while self.running:
             now = datetime.now().isoformat()
-            print(now)
+            #print(now)
             data = {
                 'name': 'name', 'screen_name': 'screen_name', 'created_at': now,
                 'location': {
@@ -39,7 +37,7 @@ class StreamManager:
                 'status': 'status',
             }
             socketio.emit('new stream', data, namespace='/main')
-            time.sleep(2)
+            time.sleep(5)
 
     def start_stream(self):
         print('starting stream')
@@ -53,11 +51,13 @@ class StreamManager:
 
     def new_connection(self):
         self.users += 1
+        print('user connected ({})'.format(self.users))
         if not self.running:
             self.start_stream()
 
     def new_disconnect(self):
         self.users -= 1
+        print('user disconnected ({})'.format(self.users))
         if self.users == 0:
             self.stop_stream()
 
