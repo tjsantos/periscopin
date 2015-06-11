@@ -45,15 +45,15 @@ class MyListener(tweepy.streaming.StreamListener):
                 }
                 socketio.emit('new stream', data, namespace='/main')
 
-                try:
-                    print((data['name'] + ' @' + data['screen_name']).encode('utf-8'))
-                    print(u', '.join(
-                        [location['city'], location['country_state'], location['country']]
-                    ).encode('utf-8'))
-                    print(data['status'].encode('utf-8') or u'Untitled')
-                    print(u'')
-                except (UnicodeDecodeError, UnicodeEncodeError) as e:
-                    import IPython; IPython.embed()
+                #try:
+                #    print((data['name'] + ' @' + data['screen_name']).encode('utf-8'))
+                #    print(u', '.join(
+                #        [location['city'], location['country_state'], location['country']]
+                #    ).encode('utf-8'))
+                #    print(data['status'].encode('utf-8') or u'Untitled')
+                #    print(u'')
+                #except (UnicodeDecodeError, UnicodeEncodeError) as e:
+                #    import IPython; IPython.embed()
 
         return True
 
@@ -63,24 +63,30 @@ headers = {'User-Agent': requests.utils.default_user_agent() + ' ' + user_agent_
 def get_stream_info(url):
     response = requests.get(url, headers=headers)
     d = pq(response.text)
-    info = d('meta[name="broadcast-data"]').attr('content')
+    info = d('meta[id="broadcast-data"]').attr('content')
     info = json.loads(info)
     return info
 
 countries = reverse_geocode.GeocodeData().countries
+iso_codes = {country: iso_code for iso_code, country in countries.items()}
 def get_location_info(broadcast):
+    location = {}
     bc = broadcast
-    country = bc['country']
-    # get country from iso code or latlong
-    if not country:
-        if bc['iso_code']:
-            country = countries[bc['iso_code']]
-        elif bc['ip_lat'] or bc['ip_lng']:
-            rg_loc = reverse_geocode.get((bc['ip_lat'], bc['ip_lng']))
-            country = rg_loc['country']
+    for key in ['city', 'country_state', 'country', 'iso_code', 'ip_lat', 'ip_lng']:
+        location[key] = bc.get(key, '')
 
-    location = {key: bc[key] for key in ['city', 'country_state', 'iso_code', 'ip_lat', 'ip_lng']}
-    location['country'] = country
+    # get location from latlong
+    if bc['ip_lat'] or bc['ip_lng']:
+        rg_loc = reverse_geocode.get((bc['ip_lat'], bc['ip_lng']))
+        location['country'] = location['country'] or rg_loc['country']
+        location['iso_code'] = location['iso_code'] or rg_loc['country_code']
+        location['city'] = location['city'] or rg_loc['city']
+    # interpolate country and iso code data
+    if not location['country'] and location['iso_code']:
+        location['country'] = countries[location['iso_code']]
+    elif not location['iso_code'] and location['country']:
+        location['iso_code'] = iso_codes.get(location['country'], '')
+
     return location
 
 listener = MyListener()
