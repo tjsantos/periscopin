@@ -55,6 +55,9 @@ class MyListener(tweepy.streaming.StreamListener):
                 #except (UnicodeDecodeError, UnicodeEncodeError) as e:
                 #    import IPython; IPython.embed()
 
+        if time.time() > stream_manager.idle_stop_time:
+            stream_manager.stop_stream()
+
         return True
 
 website = 'https://github.com/tjsantos/periscopin'
@@ -100,7 +103,8 @@ class StreamManager:
     def __init__(self):
         self.users = 0
         self.stream = stream
-        self.start_stream()
+        self.idle_stop_time = float('inf')
+        self.idle_stop_time_delay = 300 # seconds to wait for more users before disconnecting stream
 
     '''
     def _stream(self):
@@ -122,6 +126,7 @@ class StreamManager:
     def start_stream(self):
         print('starting stream')
         self.stream.filter(track=['#periscope'], async=True)
+        self.idle_stop_time = float('inf')
         #self.running = True
         #thread = Thread(target=self._stream)
         #thread.start()
@@ -134,9 +139,16 @@ class StreamManager:
     def new_connection(self):
         self.users += 1
         print('user connected ({})'.format(self.users))
+        if not self.stream.running:
+            self.start_stream()
+        self.idle_stop_time = float('inf')
 
     def new_disconnect(self):
         self.users -= 1
         print('user disconnected ({})'.format(self.users))
+        if self.users == 0:
+            self.idle_stop_time = time.time() + self.idle_stop_time_delay
+            print('disconnecting stream in {} seconds if no '
+                  'users...'.format(self.idle_stop_time_delay))
 
 stream_manager = StreamManager()
