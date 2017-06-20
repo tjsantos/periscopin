@@ -2,7 +2,7 @@ $(document).ready(function() {
     streams = [];
     new_streams = [];
     namespace = '/main';
-    var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
+    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
     socket.on('new stream', function(data) {
         new_streams.push(data);
         $('#refresh-button').text(new_streams.length + ' new streams');
