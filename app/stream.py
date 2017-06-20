@@ -25,16 +25,15 @@ class MyListener(tweepy.streaming.StreamListener):
         for url in status.entities['urls']:
             expanded_url = url['expanded_url']
             parsed_url = urlparse(expanded_url)
-            if parsed_url.netloc == 'www.periscope.tv':
+            if parsed_url.netloc in ('www.periscope.tv', 'www.pscp.tv'):
                 try:
-                    info = get_stream_info(expanded_url)
+                    broadcast = get_stream_info(expanded_url)
                 except Exception as e:
                     print('Unable to get stream info from @{}:'.format(status.author.screen_name))
                     print(e)
                     print('')
                     continue
 
-                broadcast = info['broadcast']
                 location = get_location_info(broadcast)
                 data = {
                     'name': status.author.name, 'screen_name': status.author.screen_name,
@@ -45,14 +44,14 @@ class MyListener(tweepy.streaming.StreamListener):
                 }
                 socketio.emit('new stream', data, namespace='/main')
 
-                #try:
+                # try:
                 #    print((data['name'] + ' @' + data['screen_name']).encode('utf-8'))
                 #    print(u', '.join(
                 #        [location['city'], location['country_state'], location['country']]
                 #    ).encode('utf-8'))
                 #    print(data['status'].encode('utf-8') or u'Untitled')
                 #    print(u'')
-                #except (UnicodeDecodeError, UnicodeEncodeError) as e:
+                # except (UnicodeDecodeError, UnicodeEncodeError) as e:
                 #    import IPython; IPython.embed()
 
         if time.time() > stream_manager.idle_stop_time:
@@ -64,11 +63,27 @@ website = 'https://github.com/tjsantos/periscopin'
 user_agent_add = '( {} )'.format(website)
 headers = {'User-Agent': requests.utils.default_user_agent() + ' ' + user_agent_add}
 def get_stream_info(url):
+    # get info from initial periscope redirect url
     response = requests.get(url, headers=headers)
     d = pq(response.text)
-    info = d('meta[id="broadcast-data"]').attr('content')
+    info = d('#page-container').attr('data-store')
     info = json.loads(info)
-    return info
+    broadcast_url = d('link[rel="canonical"]').attr('href')
+    broadcast_id = urlparse(broadcast_url).path.split('/')[-1]
+    try:
+        # use info from initial redirect url
+        broadcast = info['BroadcastCache']['broadcasts'][broadcast_id]['broadcast']
+    except KeyError:
+        # use info from canonical broadcast url
+        print('unable to get broadcast from: ' + url)
+        print('using public api')
+        api_url = 'https://api.periscope.tv/api/v2/getBroadcastPublic?broadcast_id=' # 1lPKqyeBnZwKb
+        api_url += broadcast_id
+        response = requests.get(api_url, headers=headers)
+        data = response.json()
+        broadcast = data['broadcast']
+
+    return broadcast
 
 countries = reverse_geocode.GeocodeData().countries
 iso_codes = {country: iso_code for iso_code, country in countries.items()}
