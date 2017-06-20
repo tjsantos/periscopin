@@ -44,15 +44,15 @@ class MyListener(tweepy.streaming.StreamListener):
                 }
                 socketio.emit('new stream', data, namespace='/main')
 
-                try:
-                   print((data['name'] + ' @' + data['screen_name']).encode('utf-8'))
-                   print(u', '.join(
-                       [location['city'], location['country_state'], location['country']]
-                   ).encode('utf-8'))
-                   print(data['status'].encode('utf-8') or u'Untitled')
-                   print(u'')
-                except (UnicodeDecodeError, UnicodeEncodeError) as e:
-                   import IPython; IPython.embed()
+                # try:
+                #    print((data['name'] + ' @' + data['screen_name']).encode('utf-8'))
+                #    print(u', '.join(
+                #        [location['city'], location['country_state'], location['country']]
+                #    ).encode('utf-8'))
+                #    print(data['status'].encode('utf-8') or u'Untitled')
+                #    print(u'')
+                # except (UnicodeDecodeError, UnicodeEncodeError) as e:
+                #    import IPython; IPython.embed()
 
         if time.time() > stream_manager.idle_stop_time:
             stream_manager.stop_stream()
