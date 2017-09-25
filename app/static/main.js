@@ -7,7 +7,7 @@ $(document).ready(function() {
         new_streams.push(data);
         $('#refresh-button').text(new_streams.length + ' new streams');
         //$('#log').prepend('<p class="time" data-time="' + data.created_at + '">asdf</p>');
-        //console.log(data);
+        console.log(data);
     });
 
     $('#refresh-button').on('click', function() {
@@ -15,8 +15,8 @@ $(document).ready(function() {
         new_streams = [];
         $('#listing').empty();
         map.series.regions[0].clear();
-        map.removeAllMarkers()
-        var selectedRegions = map.getSelectedRegions()
+        map.removeAllMarkers();
+        var selectedRegions = map.getSelectedRegions();
         var n_display = 30;
         var i_stop = Math.max(streams.length - n_display, 0);
         for (var i = streams.length - 1; i >= i_stop; i--) {
@@ -37,9 +37,9 @@ $(document).ready(function() {
                 var statusHtml = broadcast.status;
             }
 
-            var activeIfSelected = ''
+            var activeIfSelected = '';
             if (selectedRegions.indexOf(broadcast.location.iso_code) > -1) {
-                var activeIfSelected = 'list-group-item-info';
+                activeIfSelected = 'list-group-item-info';
             }
 
             var html = [
