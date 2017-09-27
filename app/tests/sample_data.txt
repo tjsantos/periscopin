@@ -1,0 +1,68 @@
+{'broadcast': {'available_for_replay': True,
+  'city': '',
+  'class_name': 'Broadcast',
+  'country': '',
+  'country_state': '',
+  'created_at': '2015-04-16T20:40:06.567409878-07:00',
+  'end': '2015-04-16T20:42:05.315066848-07:00',
+  'featured': False,
+  'friend_chat': False,
+  'has_location': False,
+  'height': 568,
+  'id': '5111472',
+  'image_url': 'https://s3-us-west-2.amazonaws.com/periscope-thumbnail-live/7cBW
+r8FqufHnonLRWHNNNtKebnfrPxWb49RLqzVG4ENQt8s16HLZ8NDYoFIr1DMqn_zoCLL9ri2nqQKcBrIv
+CQ==.jpg?AWSAccessKeyId=AKIAI34LQJZZSVNMNOFQ&Expires=1744861206&Signature=IujOmi
+CXIXNB0K0jjzt72kCff1E%3D',
+  'image_url_small': 'https://s3-us-west-2.amazonaws.com/periscope-thumbnail-liv
+e-thumb/7cBWr8FqufHnonLRWHNNNtKebnfrPxWb49RLqzVG4ENQt8s16HLZ8NDYoFIr1DMqn_zoCLL9
+ri2nqQKcBrIvCQ==_thumb_128.jpg?AWSAccessKeyId=AKIAI34LQJZZSVNMNOFQ&Expires=17448
+61206&Signature=1idfdVESV8eJDWbuwYE2J4pjDFY%3D',
+  'ip_lat': 0,
+  'ip_lng': 0,
+  'is_locked': False,
+  'iso_code': 'BR',
+  'ping': '2015-04-16T20:41:34.849683806-07:00',
+  'profile_image_url': 'http://pbs.twimg.com/profile_images/502252702848802819/E
+nr6HzvF_reasonably_small.jpeg',
+  'start': '2015-04-16T20:40:34.847907888-07:00',
+  'state': 'ENDED',
+  'status': 'Ao Vivo She Dj @energia97fm',
+  'updated_at': '2015-04-16T20:43:19.533058548-07:00',
+  'user_display_name': '\uf8ffΜοτα',
+  'user_id': '1062439',
+  'width': 320},
+ 'user': {'class_name': 'User',
+  'created_at': '2015-04-08T08:49:33.883077857-07:00',
+  'description': 'Comentarista do Melhor Programa de Futebol de São Paulo/ Produ
+tor da Radio Energia97 Fm/ Gênio ?Culto /Bonito e Humilde! OMG',
+  'display_name': '\uf8ffΜοτα',
+  'id': '1062439',
+  'initials': '',
+  'is_beta_user': False,
+  'is_employee': False,
+  'is_twitter_verified': False,
+  'n_broadcasts': 9,
+  'n_followers': 65,
+  'n_following': 73,
+  'profile_image_urls': [{'height': 128,
+    'ssl_url': 'https://pbs.twimg.com/profile_images/502252702848802819/Enr6HzvF
+_reasonably_small.jpeg',
+    'url': 'http://pbs.twimg.com/profile_images/502252702848802819/Enr6HzvF_reas
+onably_small.jpeg',
+    'width': 128},
+   {'height': 200,
+    'ssl_url': 'https://pbs.twimg.com/profile_images/502252702848802819/Enr6HzvF
+_200x200.jpeg',
+    'url': 'http://pbs.twimg.com/profile_images/502252702848802819/Enr6HzvF_200x
+200.jpeg',
+    'width': 200},
+   {'height': 400,
+    'ssl_url': 'https://pbs.twimg.com/profile_images/502252702848802819/Enr6HzvF
+_400x400.jpeg',
+    'url': 'http://pbs.twimg.com/profile_images/502252702848802819/Enr6HzvF_400x
+400.jpeg',
+    'width': 400}],
+  'twitter_screen_name': 'Mota97',
+  'updated_at': '2015-04-16T20:42:52.690275710-07:00',
+  'username': 'Mota97'}}

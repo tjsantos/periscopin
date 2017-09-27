@@ -110,17 +110,17 @@ def get_location_info(broadcast):
 
     return location
 
-listener = MyListener()
-auth = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
-auth.set_access_token(TWITTER_OAUTH_TOKEN, TWITTER_OAUTH_SECRET)
 
-stream = tweepy.Stream(auth, listener)
 
 class StreamManager:
 
     def __init__(self):
+        listener = MyListener()
+        auth = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
+        auth.set_access_token(TWITTER_OAUTH_TOKEN, TWITTER_OAUTH_SECRET)
+
+        self.stream = tweepy.Stream(auth, listener)
         self.users = 0
-        self.stream = stream
         self.idle_stop_time = float('inf')
         self.idle_stop_time_delay = 300 # seconds to wait for more users before disconnecting stream
 
@@ -169,4 +169,18 @@ class StreamManager:
             print('disconnecting stream in {} seconds if no '
                   'users...'.format(self.idle_stop_time_delay))
 
-stream_manager = StreamManager()
+
+class StreamManagerMock:
+    def __init__(self):
+        print('using stream manager mock')
+
+    def __getattr__(self, item):
+        print('mock attr: ' + item)
+        print('using empty function')
+        return lambda *args: None
+
+
+if os.environ.get('DEBUG'):
+    stream_manager = StreamManagerMock()
+else:
+    stream_manager = StreamManager()

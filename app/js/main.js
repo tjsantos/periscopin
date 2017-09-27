@@ -1,7 +1,12 @@
+
+// interactive testing using mocks
+import { mockIO } from '../tests/mockSocket';
+window.io = mockIO;
+
 $(document).ready(function() {
-    streams = [];
-    new_streams = [];
-    namespace = '/main';
+    let streams = [];
+    let new_streams = [];
+    let namespace = '/main';
     var socket = io(location.protocol + '//' + document.domain + ':' + location.port + namespace);
     socket.on('new stream', function(data) {
         new_streams.push(data);
@@ -63,7 +68,7 @@ $(document).ready(function() {
         $('#refresh-button').text(new_streams.length + ' new streams');
     });
 
-    map = new jvm.Map({
+    let map = new jvm.Map({
         container: $('#map'),
         map: 'world_mill_en',
         regionsSelectable: true,
@@ -97,7 +102,7 @@ $(document).ready(function() {
         values[stream.location.iso_code] = 1;
         map.series.regions[0].setValues(values);
         if (stream.location.ip_lat || stream.location.ip_lng) {
-            markers = {};
+            let markers = {};
             markers[stream.screen_name] = {
                 latLng: [stream.location.ip_lat, stream.location.ip_lng],
                 name: '@' + stream.screen_name,

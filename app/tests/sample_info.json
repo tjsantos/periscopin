@@ -1,0 +1,534 @@
+{
+  "Auth": {
+    "cookie": null,
+    "user": null,
+    "timestamp": 1497622602055,
+    "csrf": "cc484c6a-3515-423a-a102-588f76c76632",
+    "isLoggedIn": false,
+    "isLimbo": false,
+    "isEmployee": false,
+    "isLimitedAccount": false
+  },
+  "Blocked": {},
+  "Broadcast": {
+    "forceUpdate": false,
+    "failed": [],
+    "pending": [],
+    "error": {
+      "isNotFound": false,
+      "isServerError": false,
+      "isUnavailable": false
+    }
+  },
+  "BroadcastCache": {
+    "broadcasts": {
+      "1BRJjWqQoNexw": {
+        "broadcast": {
+          "data": {
+            "class_name": "Broadcast",
+            "id": "1BRJjWqQoNexw",
+            "created_at": "2017-06-19T17:30:53.524120854Z",
+            "updated_at": "2017-06-19T18:38:37.000742871Z",
+            "user_id": "1drQexvqnyEbG",
+            "user_display_name": "Kin 👊  Fitt",
+            "username": "KinshasaMoffitt",
+            "twitter_id": "453863523",
+            "twitter_username": "KinshasaMoffitt",
+            "profile_image_url": "https://prod-profile.pscp.tv/1drQexvqnyEbG/3fdb7805578dda6d124f6a9d784ad506-128.jpg",
+            "state": "ENDED",
+            "is_locked": false,
+            "friend_chat": false,
+            "language": "en",
+            "start": "2017-06-19T17:34:46.023351352Z",
+            "ping": "2017-06-19T18:38:16.329535696Z",
+            "end": "2017-06-19T18:38:33.866304569Z",
+            "has_moderation": true,
+            "has_location": true,
+            "city": "Jurupa Valley, CA",
+            "country": "United States",
+            "country_state": "",
+            "iso_code": "US",
+            "ip_lat": 33.981,
+            "ip_lng": -117.522,
+            "width": 320,
+            "height": 568,
+            "camera_rotation": 89,
+            "image_url": "https://prod-thumbnail.pscp.tv/fCboZNBIdP_1_cONydTd_nbF9y3Bky89vb9b2gFNyBkB1cJ6K1paVsBKoLqTGBepxTLK5WIJnTIknmqsgjdutQ/chunk_1497897505818332099_1912.jpg?Expires=1813257516&Signature=B9QY-w5EMcXZG5GAvECI~bjletbdrvdSIKr6RPuw3RztJqZfRoQ3PIWqafr3oaczzdlrBP2irhdcU5SYBT4HSI9pJvPgw4GCx1UBSxLk4gYHqB8Eo93hZsFmjegq9wepneC1kCQ71MvvqNv803eG1m25vG8eQyWl4GN6FSQHfWopZTO7vG8Nz9y~EGO1MR9StOpqwGdKwf9IVe2npgDyAhR8~dlSd4wnxbqdqL9kO6f~rguVj2jk3dfzhjzANow7uAMi8Al5mNELuAKZcRrz7MHi52YJNUcpktliJODkkooG4xjJiEA9ZguoakoOYIAONlkIN5jWTU3b9vErC588mA__&Key-Pair-Id=APKAIHCXHHQVRTVSFRWQ",
+            "image_url_small": "https://prod-thumbnail-small.pscp.tv/fCboZNBIdP_1_cONydTd_nbF9y3Bky89vb9b2gFNyBkB1cJ6K1paVsBKoLqTGBepxTLK5WIJnTIknmqsgjdutQ/chunk_1497897505818332099_1912_thumb_128.jpg?Expires=1813257516&Signature=IokJdo~qJeFC3iDmKHEOuFgSJ4Hkq33g36IlMPvSnCe5za1Sf~4Jo9eGppHIzrE1e0-hxQGn6bp-dn~oUMlJBO~cZcrdCDU9IE6CNXvSF3jjGo4zK0FGp0EZfwV~C2tJKcIBMp1ZAdyDEFepfurULVjJ~Dc~wfi9~C3BrldfK5yFamiNOEnvgOcEsJklmDf5PJi86DBNR4kT-MC-mT0AZHEjqIi34PYDBlt8kxb8xhF1SMmnKZSGsGJW9mLKL4y1dQOuntjBZMGPIENxPYdcNQs~nlfZpOjUiQD25utkxCUQJwAuvs29hfkDzzw~Tkl0-77DunOFdLIwa--fJI2ayQ__&Key-Pair-Id=APKAIHCXHHQVRTVSFRWQ",
+            "status": "Monday morning kick off! Legs & Booty #workout w/ Kin Fitt #fitness",
+            "broadcast_source": "periscope_ios_1.10.2",
+            "available_for_replay": true,
+            "expiration": -1,
+            "tweet_id": "876855790757228545",
+            "media_key": "28_876854814230970368",
+            "token": "bBaxNjFkclFleHZxbnlFYkd8MUJSSmpXcVFvTmV4d3gzlHFPz322SIw24T3medotFo9EWSl1IuMLHtuxA9Jc"
+          },
+          "broadcastHasUpdated": false,
+          "isRunning": false,
+          "isUnavailable": false,
+          "isEnded": true,
+          "endTime": "2017-06-19T18:38:16.329Z",
+          "duration": 3827.843,
+          "formattedDuration": "1:03:47",
+          "hasLocation": "Jurupa Valley, CA",
+          "hasFeaturedCategory": false,
+          "getFeaturedColor": "#FADD5F",
+          "supportsProducerFraming": false,
+          "url": "https://www.pscp.tv/w/1BRJjWqQoNexw",
+          "relativeUrl": "/w/1BRJjWqQoNexw",
+          "requestedUrl": "https://www.pscp.tv/w/bBaxNjFkclFleHZxbnlFYkd8MUJSSmpXcVFvTmV4d3gzlHFPz322SIw24T3medotFo9EWSl1IuMLHtuxA9Jc",
+          "canonicalUrl": "https://www.pscp.tv/KinshasaMoffitt/1BRJjWqQoNexw",
+          "urlWithUsername": "https://www.pscp.tv/KinshasaMoffitt/1BRJjWqQoNexw",
+          "relativeUrlWithUsername": "/KinshasaMoffitt/1BRJjWqQoNexw",
+          "deepLinkUrl": "pscp://broadcast/1BRJjWqQoNexw",
+          "inAppUrl": "pscp://broadcast/1BRJjWqQoNexw",
+          "cardPlayerUrl": "https://www.pscp.tv/w/1BRJjWqQoNexw/card",
+          "localThumbnailUrl": "",
+          "locationDescription": "Jurupa Valley, CA, United States",
+          "lngLat": [
+            -117.522,
+            33.981
+          ],
+          "available_for_replay": true,
+          "broadcast_source": "periscope_ios_1.10.2",
+          "camera_rotation": 89,
+          "city": "Jurupa Valley, CA",
+          "class_name": "Broadcast",
+          "country": "United States",
+          "country_state": "",
+          "created_at": "2017-06-19T17:30:53.524120854Z",
+          "end": "2017-06-19T18:38:33.866304569Z",
+          "expiration": -1,
+          "friend_chat": false,
+          "has_location": true,
+          "height": 568,
+          "id": "1BRJjWqQoNexw",
+          "image_url": "https://prod-thumbnail.pscp.tv/fCboZNBIdP_1_cONydTd_nbF9y3Bky89vb9b2gFNyBkB1cJ6K1paVsBKoLqTGBepxTLK5WIJnTIknmqsgjdutQ/chunk_1497897505818332099_1912.jpg?Expires=1813257516&Signature=B9QY-w5EMcXZG5GAvECI~bjletbdrvdSIKr6RPuw3RztJqZfRoQ3PIWqafr3oaczzdlrBP2irhdcU5SYBT4HSI9pJvPgw4GCx1UBSxLk4gYHqB8Eo93hZsFmjegq9wepneC1kCQ71MvvqNv803eG1m25vG8eQyWl4GN6FSQHfWopZTO7vG8Nz9y~EGO1MR9StOpqwGdKwf9IVe2npgDyAhR8~dlSd4wnxbqdqL9kO6f~rguVj2jk3dfzhjzANow7uAMi8Al5mNELuAKZcRrz7MHi52YJNUcpktliJODkkooG4xjJiEA9ZguoakoOYIAONlkIN5jWTU3b9vErC588mA__&Key-Pair-Id=APKAIHCXHHQVRTVSFRWQ",
+          "image_url_small": "https://prod-thumbnail-small.pscp.tv/fCboZNBIdP_1_cONydTd_nbF9y3Bky89vb9b2gFNyBkB1cJ6K1paVsBKoLqTGBepxTLK5WIJnTIknmqsgjdutQ/chunk_1497897505818332099_1912_thumb_128.jpg?Expires=1813257516&Signature=IokJdo~qJeFC3iDmKHEOuFgSJ4Hkq33g36IlMPvSnCe5za1Sf~4Jo9eGppHIzrE1e0-hxQGn6bp-dn~oUMlJBO~cZcrdCDU9IE6CNXvSF3jjGo4zK0FGp0EZfwV~C2tJKcIBMp1ZAdyDEFepfurULVjJ~Dc~wfi9~C3BrldfK5yFamiNOEnvgOcEsJklmDf5PJi86DBNR4kT-MC-mT0AZHEjqIi34PYDBlt8kxb8xhF1SMmnKZSGsGJW9mLKL4y1dQOuntjBZMGPIENxPYdcNQs~nlfZpOjUiQD25utkxCUQJwAuvs29hfkDzzw~Tkl0-77DunOFdLIwa--fJI2ayQ__&Key-Pair-Id=APKAIHCXHHQVRTVSFRWQ",
+          "ip_lat": 33.981,
+          "ip_lng": -117.522,
+          "is_locked": false,
+          "iso_code": "US",
+          "language": "en",
+          "media_key": "28_876854814230970368",
+          "ping": "2017-06-19T18:38:16.329535696Z",
+          "profile_image_url": "https://prod-profile.pscp.tv/1drQexvqnyEbG/3fdb7805578dda6d124f6a9d784ad506-128.jpg",
+          "start": "2017-06-19T17:34:46.023351352Z",
+          "state": "ENDED",
+          "status": "Monday morning kick off! Legs & Booty #workout w/ Kin Fitt #fitness",
+          "token": "bBaxNjFkclFleHZxbnlFYkd8MUJSSmpXcVFvTmV4d3gzlHFPz322SIw24T3medotFo9EWSl1IuMLHtuxA9Jc",
+          "twitter_id": "453863523",
+          "twitter_username": "KinshasaMoffitt",
+          "updated_at": "2017-06-19T18:38:37.000742871Z",
+          "user_display_name": "Kin 👊  Fitt",
+          "user_id": "1drQexvqnyEbG",
+          "username": "KinshasaMoffitt",
+          "width": 320
+        },
+        "timestamp": 1497917861789,
+        "n_watched": 336
+      }
+    },
+    "tokens": {
+      "bBaxNjFkclFleHZxbnlFYkd8MUJSSmpXcVFvTmV4d3gzlHFPz322SIw24T3medotFo9EWSl1IuMLHtuxA9Jc": "1BRJjWqQoNexw"
+    }
+  },
+  "BroadcastSidebar": {
+    "DEFAULT_WIDTH": 450,
+    "BROADCAST_MIN_WIDTH": 720,
+    "visible": false,
+    "component": null,
+    "componentProps": {},
+    "isProfileVisible": false,
+    "isSearchVisible": false
+  },
+  "BroadcastStats": {
+    "broadcastIds": null,
+    "chartLimit": "30",
+    "chartMetric": "nTotalWatched",
+    "filters": [],
+    "sort": "start",
+    "sortDirection": "desc",
+    "tableColumns": [
+      "status",
+      "start",
+      "duration",
+      "nTotalWatched",
+      "nTotalHearts",
+      "totalWatchedTime",
+      "totalWatchedTimePerMinute"
+    ]
+  },
+  "Channel": {
+    "selectedChannelId": null,
+    "selectedChannelBroadcastIds": [],
+    "channels": [],
+    "channelsError": {},
+    "channelsHash": {},
+    "channelBroadcastIdsHash": {},
+    "channelBroadcastIndex": 0
+  },
+  "Chat": {
+    "chatSession": {},
+    "moderation": null,
+    "pending": [],
+    "failed": [],
+    "sessionError": false,
+    "config": {
+      "cursor": "",
+      "timetoken": 0
+    },
+    "inited": false,
+    "fetching": false,
+    "paused": false,
+    "needsMoreMessages": false,
+    "currentNtp": 0,
+    "replay": false,
+    "backfill": false,
+    "occupancy": 0,
+    "shouldFlush": false,
+    "timer": null,
+    "queuedMessages": {
+      "chats": [],
+      "hearts": []
+    },
+    "mutedUsers": {}
+  },
+  "Client": {
+    "dimensions": null,
+    "applicationMode": null,
+    "layout": "DESKTOP",
+    "tabHidden": false,
+    "languages": [
+      "en"
+    ],
+    "locale": "en",
+    "playbackDevice": "DEFAULT"
+  },
+  "CommentInput": {
+    "replyUsername": null,
+    "isFocused": false
+  },
+  "Couchmode": {
+    "broadcastIds": [],
+    "index": 0,
+    "seen": []
+  },
+  "EventCache": {
+    "events": {}
+  },
+  "Form": {},
+  "Following": {
+    "failed": [],
+    "pending": []
+  },
+  "Followers": {
+    "failed": [],
+    "pending": []
+  },
+  "GlobalDrawer": {
+    "visible": false,
+    "component": null,
+    "componentProps": {},
+    "options": {}
+  },
+  "GlobalTooltip": {
+    "component": null,
+    "componentProps": {},
+    "isAnchored": false,
+    "position": "bottom",
+    "shouldBubble": false,
+    "target": null,
+    "visible": false,
+    "callout": null,
+    "zIndex": 50,
+    "disableArrow": false,
+    "animate": false
+  },
+  "Modal": {
+    "visible": false,
+    "component": null,
+    "componentProps": {},
+    "options": {}
+  },
+  "PeriscopeEnv": {
+    "protocol": "https",
+    "host": "www.pscp.tv",
+    "mobileScheme": "pscp",
+    "canvasCorsSupported": true
+  },
+  "Persist": {},
+  "ServiceToken": {
+    "channels": {
+      "token": null,
+      "pending": false,
+      "failed": false
+    },
+    "safety": {
+      "token": null,
+      "pending": false,
+      "failed": false
+    }
+  },
+  "Replay": {
+    "replayAvailable": false,
+    "available": false,
+    "requestedPosition": null,
+    "elapsed": 0,
+    "duration": 1,
+    "percentage": 0
+  },
+  "Report": {
+    "failed": [],
+    "pending": [],
+    "error": null
+  },
+  "Roster": {
+    "rooms": {}
+  },
+  "Search": {
+    "input": "",
+    "pending": false,
+    "results": null
+  },
+  "SessionToken": {
+    "authed": {
+      "broadcastHistory": {
+        "token": {
+          "session_id": "1AbVJWA2tN9M1vqNALjV6oBz7h5b9ExAiKLvZGODBJoyLqKAjc8FxEBu62XZ6GZ4euS9NkeRjAf0EUWDdDNc1uDjDpYv9370qssPl"
+        },
+        "expiry": 1497921461554
+      },
+      "thumbnailPlaylist": {
+        "token": {
+          "session_id": "1v8InHtOFkYw-BxKKEoHAFZnzd6WW7lIUVYd0jDXd8A67rK4kNdeE1z-K1PXqyxMYw70cJM94o6I2WrwHWNPt7ZzHagZ4JseNc8t-9HVVjj1LwCnL"
+        },
+        "expiry": 1497921461554
+      },
+      "serviceToken": {
+        "token": {
+          "session_id": "1rXQ-Eojhr8wPktFtGXoyylBR4-zjOcTqAZahm7CVTYw3P-cE0_ZGpx63OFLHZ24BFgNRAQpMYkM6Vkxcsub5bp3H7OPPelxwclHM"
+        },
+        "expiry": 1497921461554
+      }
+    },
+    "public": {
+      "broadcastHistory": {
+        "token": {
+          "session_id": "1_JN3ysUE67yDw0t3gMwrsksyuHUmprfEi1yQYRT_k8EPTXAqX2s0Gdhv7Iffg_95B7h4gdmiWxA5MuG2xRtqOpiUNEJhJTUcXqxsHHwP5dcIwA_j"
+        },
+        "expiry": 1497921461554
+      },
+      "thumbnailPlaylist": {
+        "token": {
+          "session_id": "1NV9VsYeS-CKydJNjTQGaOLjaGzNppQl_hYE71RGiqQzpU0fn1aRlbYHlJatzzYzwYFx2ZJJuXVTIF0jjwadBTHY1bTjtCJ9ekEQm5zHGwv-bZV2qs9mN0B_T"
+        },
+        "expiry": 1497921461554
+      },
+      "serviceToken": {
+        "token": {
+          "session_id": "196Kx4hfVFHb-EMjlkOx8_Cj4wQryQ9_XBxVUOkYJanMMzBx61aIyg1l8P-b0utaqGDdKuJHlufktfJWTm2jS5GCnba54t2k3f3aw8jiYyp9l"
+        },
+        "expiry": 1497921461554
+      }
+    }
+  },
+  "Settings": {
+    "hasSetMuted": false,
+    "muted": false,
+    "teaching": {},
+    "hello": {
+      "warning_phrases": [
+        {
+          "locale": "en",
+          "words": [
+            "pussy",
+            "boob",
+            "boobs",
+            "boobies",
+            "tits",
+            "vagina",
+            "cunt",
+            "bitch",
+            "nude"
+          ]
+        }
+      ],
+      "features": {
+        "moderation": true,
+        "enable_360_rendering": true,
+        "num_curated_global_channels": 4,
+        "num_broadcasts_per_global_channel": 10,
+        "superfans_prompt_interval": 48,
+        "enable_invite_friends": true,
+        "enable_notification_tab": true
+      },
+      "browser_only_deep_url_paths": [
+        "/.well-known",
+        "/about",
+        "/assets",
+        "/content",
+        "/embed",
+        "/help",
+        "/i",
+        "/partners",
+        "/press",
+        "/privacy",
+        "/tos",
+        "/v",
+        "/vipprogram",
+        "/android-attribution",
+        "/ios-attribution"
+      ]
+    }
+  },
+  "Thumbnail": {
+    "playlist": null,
+    "pending": [],
+    "failed": [],
+    "preloaded": false,
+    "indexed": false,
+    "thumbnailIndex": [],
+    "thumbnailCache": []
+  },
+  "User": {
+    "pending": [],
+    "failed": [],
+    "pendingFollowing": [],
+    "failedFollowing": [],
+    "pendingUnfollowing": [],
+    "failedUnfollowing": [],
+    "error": {}
+  },
+  "UserBroadcastHistory": {
+    "failed": [],
+    "pending": [],
+    "error": null
+  },
+  "UserBroadcastHistoryCache": {
+    "histories": {}
+  },
+  "UserCache": {
+    "users": {
+      "1drQexvqnyEbG": {
+        "timestamp": 1497917861790,
+        "user": {
+          "class_name": "User",
+          "id": "1drQexvqnyEbG",
+          "created_at": "2016-01-08T23:45:03.089379706Z",
+          "is_beta_user": false,
+          "is_employee": false,
+          "is_twitter_verified": false,
+          "twitter_screen_name": "KinshasaMoffitt",
+          "username": "KinshasaMoffitt",
+          "display_name": "Kin 👊  Fitt",
+          "description": "Find me on LIVE.Me  http://www.liveme.com/media/play/card.html?s=812980483696099328",
+          "profile_image_urls": [
+            {
+              "url": "https://prod-profile.pscp.tv/1drQexvqnyEbG/3fdb7805578dda6d124f6a9d784ad506-1024.jpg",
+              "ssl_url": "https://prod-profile.pscp.tv/1drQexvqnyEbG/3fdb7805578dda6d124f6a9d784ad506-1024.jpg",
+              "width": 1024,
+              "height": 1024
+            },
+            {
+              "url": "https://prod-profile.pscp.tv/1drQexvqnyEbG/3fdb7805578dda6d124f6a9d784ad506-512.jpg",
+              "ssl_url": "https://prod-profile.pscp.tv/1drQexvqnyEbG/3fdb7805578dda6d124f6a9d784ad506-512.jpg",
+              "width": 512,
+              "height": 512
+            },
+            {
+              "url": "https://prod-profile.pscp.tv/1drQexvqnyEbG/3fdb7805578dda6d124f6a9d784ad506-256.jpg",
+              "ssl_url": "https://prod-profile.pscp.tv/1drQexvqnyEbG/3fdb7805578dda6d124f6a9d784ad506-256.jpg",
+              "width": 256,
+              "height": 256
+            },
+            {
+              "url": "https://prod-profile.pscp.tv/1drQexvqnyEbG/3fdb7805578dda6d124f6a9d784ad506-128.jpg",
+              "ssl_url": "https://prod-profile.pscp.tv/1drQexvqnyEbG/3fdb7805578dda6d124f6a9d784ad506-128.jpg",
+              "width": 128,
+              "height": 128
+            }
+          ],
+          "vip": "silver",
+          "twitter_id": "453863523",
+          "initials": "",
+          "n_followers": 13831,
+          "n_following": 277,
+          "n_hearts": 13227440,
+          "twitterUserId": "453863523",
+          "isShellAccount": false,
+          "displayName": "Kin 👊  Fitt",
+          "displayUsername": "KinshasaMoffitt",
+          "isVerified": false,
+          "twitterUrl": "https://twitter.com/KinshasaMoffitt",
+          "canonicalPeriscopeUrl": "https://www.pscp.tv/KinshasaMoffitt",
+          "periscopeUrl": "https://www.pscp.tv/KinshasaMoffitt",
+          "followUrl": "https://www.pscp.tv/KinshasaMoffitt/follow",
+          "relativePeriscopeUrl": "/KinshasaMoffitt",
+          "relativeUrl": "/KinshasaMoffitt",
+          "canonicalUrl": "https://www.pscp.tv/KinshasaMoffitt",
+          "url": "https://www.pscp.tv/KinshasaMoffitt",
+          "deepLinkUrl": "pscp://user/KinshasaMoffitt",
+          "deepLinkFollowUrl": "pscp://user/KinshasaMoffitt/follow",
+          "inAppUrl": "pscp://user/KinshasaMoffitt",
+          "avatar": {
+            "url": "https://prod-profile.pscp.tv/1drQexvqnyEbG/3fdb7805578dda6d124f6a9d784ad506-128.jpg",
+            "ssl_url": "https://prod-profile.pscp.tv/1drQexvqnyEbG/3fdb7805578dda6d124f6a9d784ad506-128.jpg",
+            "width": 128,
+            "height": 128
+          },
+          "avatarUrl": "https://prod-profile.pscp.tv/1drQexvqnyEbG/3fdb7805578dda6d124f6a9d784ad506-128.jpg"
+        }
+      }
+    },
+    "usernames": {
+      "kinshasamoffitt": "1drQexvqnyEbG"
+    }
+  },
+  "Video": {
+    "video": null,
+    "pending": [],
+    "failed": []
+  },
+  "VideoPlayer": {
+    "adPlaylist": null,
+    "audio": "OFF",
+    "appAvailable": false,
+    "autoplay": false,
+    "playbackSupported": false,
+    "playerBackgroundReady": false,
+    "orientation": 0,
+    "dimensions": {
+      "width": 0,
+      "height": 0
+    },
+    "cinema": false,
+    "playerState": "STOPPED",
+    "playerMode": "UNKNOWN",
+    "presentation": "INTERSTITIAL",
+    "requestedTimecode": -1,
+    "timecodePresent": false,
+    "isCinemaPlayer": false,
+    "isAutoplay": false,
+    "videoHasStarted": false,
+    "isConnecting": false,
+    "isConnected": false,
+    "isPlaying": false,
+    "isStopped": true,
+    "isPaused": false,
+    "isStalled": false,
+    "playerIsUnavailable": false,
+    "isStoppedInterstitial": true,
+    "isLoadingVideo": false,
+    "isExpectingVideo": false,
+    "isPlayback": false,
+    "isLiveMode": false,
+    "isReplayMode": false,
+    "isVideoPresentation": false,
+    "isInterstitialPresentation": true,
+    "isUnknownMode": true,
+    "unmuted": false,
+    "muted": true,
+    "includeVideoUI": false
+  }
+}
