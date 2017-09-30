@@ -1,7 +1,18 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 // interactive testing using mocks
-import { mockIO } from '../tests/mockSocket';
-window.io = mockIO;
+// import { mockIO } from '../tests/mockSocket';
+// window.io = mockIO;
+
+class Hello extends React.Component {
+    render() {
+        return <h1>hello world</h1>;
+    }
+}
+
+ReactDOM.render(<Hello />, document.querySelector(`#root`));
+
 
 $(document).ready(function() {
     let streams = [];

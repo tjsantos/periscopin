@@ -24,8 +24,22 @@
     <!-- custom stylesheet -->
     <link rel="stylesheet" href="/static/base.css">
     <link rel="stylesheet" href="/static/jquery-jvectormap-2.0.2.css" type="text/css" media="screen"/>
+    <script>
+      // test polyfill
+      delete window.Promise;
+      delete window.fetch;
+      delete Array.prototype.includes;
+      delete window.Intl;
+      window.addEventListener('load', function() {
+        console.log('window.Promise: ' + window.Promise);
+        console.log('window.fetch: ' + window.fetch);
+        console.log('Array.prototype.includes: ' + Array.prototype.includes);
+        console.log('window.Intl: ' + window.Intl);
+      });
+    </script>
   </head>
   <body>
+    <div id="root">root</div>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-3">
