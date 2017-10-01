@@ -6,10 +6,13 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
+    "bootstrap": "^4.0.0-beta",
+    "css-loader": "^0.28.7",
+    "jquery": "^3.2.1",
+    "popper.js": "^1.12.5",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
-  },
-  "devDependencies": {
+    "react-dom": "^16.0.0",
+    "style-loader": "^0.18.2",
     "webpack": "^3.6.0"
   },
   "scripts": {
