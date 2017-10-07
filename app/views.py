@@ -6,9 +6,10 @@ from threading import Thread
 from datetime import datetime
 import time
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+# no longer necessary. index served from static folder using `WhiteNoise`
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
 
 @socketio.on('connect', namespace='/main')
 def on_connect():

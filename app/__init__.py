@@ -33,8 +33,10 @@ elif async_mode == 'gevent':
 
 from flask import Flask
 from flask_socketio import SocketIO
+from whitenoise import WhiteNoise
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'  # no encryption/sessions used
+app.wsgi_app = WhiteNoise(app.wsgi_app, root='app/static/', index_file=True)
 socketio = SocketIO(app, async_mode=async_mode)
 from app import views

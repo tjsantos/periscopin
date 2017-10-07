@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import logo from './logo.svg';
+import './App.css';
 
 // interactive testing using mocks
 // import { mockIO } from '../tests/mockSocket';
@@ -52,7 +54,8 @@ const Listing = () => {
 
 const App = () => {
     return (
-        <div>
+        <div className="App">
+            <img src={logo} alt="logo" className="Logo" />
             <Hello />
             <Listing />
         </div>
