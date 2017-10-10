@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -46,7 +48,11 @@ module.exports = {
             }
         ]
     },
-    devServer: {
-        contentBase: './app/dist'
-    }
+    plugins: [
+        new CleanWebpackPlugin(['./app/dist']),
+        new HtmlWebpackPlugin({
+            template: './app/src/index.html',
+            inject: false
+        })
+    ]
 };
