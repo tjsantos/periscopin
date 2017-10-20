@@ -58,12 +58,29 @@ const Listing = () => {
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="container-fluid">
       test
       <img src={logo} alt="logo" className="Logo"/>
       <Hello/>
-      <Listing/>
 
+      <br />
+      <div class="row">
+        <div class="col-md-3">
+          <div class="row">
+            <button type="button" class="btn btn-default btn-lg btn-block" id="refresh-button">
+              0 new streams
+            </button>
+          </div>
+          <div class="list-group row" id="listing" style={{overflowY: 'scroll', height: '90vh'}}>
+            <Listing/>
+          </div>
+        </div>
+        <div class="col-md-9" style={{height: '100vh'}}>
+          <div id="map">
+            map
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
