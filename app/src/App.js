@@ -36,7 +36,7 @@ const Listing = () => {
   return (
     <div className="h-100 d-flex flex-column">
       <RefreshButton/>
-      <div className="flex-auto list-group">
+      <div className="list-group flex-auto overflow-y-scroll">
         { listItems }
       </div>
     </div>
@@ -44,19 +44,19 @@ const Listing = () => {
 };
 
 const GoogleMap = () => {
-  return <div>map345</div>;
+  return <div>map</div>;
 };
 
 const App = () => {
   console.log('rendering App 1');
 
   return (
-    <div className="App a">
+    <div className="App">
       <div className="row no-gutters h-100">
         <div className="col-sm-9 order-sm-2">
           <GoogleMap/>
         </div>
-        <div className="col-sm-3 order-sm-1">
+        <div className="col-sm-3 order-sm-1 h-100">
           <Listing/>
         </div>
       </div>
