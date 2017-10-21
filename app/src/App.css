@@ -1,5 +1,5 @@
 .App {
-    display: flex; /* test */
+    height: 100vh;
 }
 
 .Logo {
@@ -19,4 +19,8 @@
 #listing {
     height: 90vh;
     overflow-y: scroll;
+}
+
+.flex-auto {
+    flex: auto;
 }

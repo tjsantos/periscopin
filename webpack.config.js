@@ -6,7 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
   entry: {
     polyfills: './app/src/polyfills.js',
-    main: './app/src/main.js',
+    main: ['react-hot-loader/patch', './app/src/main.js']
   },
   output: {
     path: path.resolve(__dirname, 'app/dist'),
@@ -20,7 +20,11 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env', 'react']
+            presets: [
+              ['env', { "modules": false }],
+              'react'
+            ],
+            plugins: ['react-hot-loader/babel']
           }
         }
       },
@@ -53,6 +57,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './app/src/index.html',
       inject: false
-    })
+    }),
+    new webpack.NamedModulesPlugin()
   ]
 };

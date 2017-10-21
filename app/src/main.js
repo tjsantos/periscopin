@@ -1,92 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import logo from './logo.svg';
-import './App.css';
-
-// interactive testing using mocks
-// import { mockIO } from '../tests/mockSocket';
-// window.io = mockIO;
-
-$(() => console.log('ready! from jquery handler'));
-
-class Hello extends React.Component {
-  render() {
-    return <h1>hello world</h1>;
-  }
-}
+import { AppContainer } from 'react-hot-loader';
+import App from './App.js';
 
 let a = io;
 
-const Listing = () => {
-  return (<div class="list-group">
-    <a href="#"
-       class="list-group-item list-group-item-action flex-column align-items-start active">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">List group item heading</h5>
-        <small>3 days ago</small>
-      </div>
-      <p class="mb-1">
-        Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget
-        risus varius blandit.
-      </p>
-      <small>Donec id elit non mi porta.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">List group item heading</h5>
-        <small class="text-muted">3 days ago</small>
-      </div>
-      <p class="mb-1">
-        Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget
-        risus varius blandit.
-      </p>
-      <small class="text-muted">Donec id elit non mi porta.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">List group item heading</h5>
-        <small class="text-muted">3 days ago</small>
-      </div>
-      <p class="mb-1">
-        Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget
-        risus varius blandit.
-      </p>
-      <small class="text-muted">Donec id elit non mi porta.</small>
-    </a>
-  </div>);
-};
-
-const RefreshButton = () => {
-  return (
-    <button type="button" className="btn btn-default btn-lg btn-block" id="refresh-button">
-      0 new streams
-    </button>
+const render = Component => {
+  ReactDOM.render(
+    <AppContainer>
+      <Component />
+    </AppContainer>,
+    document.getElementById('root')
   );
 };
 
-const App = () => {
-  return (
-    <div className="container-fluid">
-      <div className="row" style={{height: '100vh'}}>
-        <div className="col-sm-3">
-          <div className="row">
-            <RefreshButton/>
-          </div>
-          <div className="list-group row" id="listing">
-            <Listing/>
-          </div>
-        </div>
-        <div className="col-sm-9">
-          <div id="map">
-            map
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+render(App);
 
-ReactDOM.render(<App/>, document.querySelector(`#root`));
+// Webpack Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept('./App.js', () => {
+    console.log('accepted new App');
+    render(App);
+  });
+}
+
 //
 //
 // $(document).ready(function () {
