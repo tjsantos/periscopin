@@ -30,11 +30,11 @@ const RefreshButton = () => {
   );
 };
 
-const Listing = () => {
+const Streams = () => {
   const listItems = new Array(10).fill(<ListItem/>);
 
   return (
-    <div className="h-100 d-flex flex-column">
+    <div className="d-flex flex-column h-100">
       <RefreshButton/>
       <div className="list-group flex-auto overflow-y-scroll">
         { listItems }
@@ -51,14 +51,12 @@ const App = () => {
   console.log('rendering App 1');
 
   return (
-    <div className="App">
-      <div className="row no-gutters h-100">
-        <div className="col-sm-9 order-sm-2">
-          <GoogleMap/>
-        </div>
-        <div className="col-sm-3 order-sm-1 h-100">
-          <Listing/>
-        </div>
+    <div className="row no-gutters App">
+      <div className="col-sm-9 order-sm-2 MapContainer">
+        <GoogleMap/>
+      </div>
+      <div className="col-sm-3 order-sm-1 StreamsContainer">
+        <Streams/>
       </div>
     </div>
   );
