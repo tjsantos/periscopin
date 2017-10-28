@@ -1,18 +1,67 @@
-.App {
-    height: 100vh;
+html {
+    font-size: 0.9rem;
 }
-
+.AppContainer {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+}
 .MapContainer {
-    height: 35vh;
+    flex: 0 1 200px;
 }
 .StreamsContainer {
-    height: 65vh;
+    flex: 1;
+    min-height: 0;
+}
+.StreamItem {
+    display: flex;
+    height: 8.5rem;
+    padding: 0.5rem;
+}
+.StreamThumb {
+    width: 7.5rem;
+    height: 7.5rem;
+    background-size: cover;
+    background-position: center;
+    margin-right: 0.5rem;
+}
+.StreamDetails {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
 }
 
 @media (min-width: 576px) {
-    .MapContainer, .StreamsContainer {
-        height: 100vh;
+    html {
+        font-size: 0.95rem;
     }
+    .AppContainer {
+        flex-flow: row;
+    }
+    .MapContainer {
+        flex: 1;
+        order: 2;
+    }
+    .StreamsContainer {
+        flex: 0 1 28rem;
+        order: 1;
+    }
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 1rem;
+    }
+}
+
+.RefreshButton:hover {
+    cursor: pointer;
+}
+.RefreshButton.disabled, .RefreshButton:disabled {
+    cursor: default;
 }
 
 .flex-auto {
@@ -21,4 +70,8 @@
 
 .overflow-y-scroll {
     overflow-y: scroll;
+}
+
+.overflow-hidden {
+    overflow: hidden;
 }
