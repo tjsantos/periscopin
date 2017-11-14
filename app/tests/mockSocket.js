@@ -10,6 +10,7 @@ export function mockIO(url) {
             const streamData = () => {
                 const next = it.next();
                 if (!next.done) {
+                    console.log('cb', next.value);
                     callback(next.value);
                     setTimeout(streamData, 1000);
                 }
