@@ -21,8 +21,6 @@ if async_mode is None:
     if async_mode is None:
         async_mode = 'threading'
 
-    print('async_mode is ' + async_mode)
-
 # monkey patching is necessary because this application uses a background thread
 if async_mode == 'eventlet':
     import eventlet
@@ -30,6 +28,8 @@ if async_mode == 'eventlet':
 elif async_mode == 'gevent':
     from gevent import monkey
     monkey.patch_all()
+
+print('async_mode is ' + async_mode)
 
 from flask import Flask
 from flask_socketio import SocketIO
