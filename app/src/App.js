@@ -20,7 +20,7 @@ const ListItem = (props) => {
        className="list-group-item list-group-item-action StreamItem">
       <div
         className="StreamThumb"
-        style={{backgroundImage: "url(http://via.placeholder.com/350x150)"}}
+        style={{backgroundImage: `url(${stream.profile_image_url})`}}
       />
       <div className="StreamDetails">
         <p className="m-0">
@@ -92,7 +92,7 @@ const RefreshButton = props => {
 const Streams = props => {
   const listItems = props.streams.map(stream => {
     return (
-      <ListItem stream={stream} key={stream.url} />
+      <ListItem stream={stream} key={stream.id} />
     );
   });
 
@@ -130,7 +130,7 @@ class App extends React.Component {
     this.setState(prevState => {
       for (let streams of [prevState.streams, prevState.newStreams]) {
         for (let stream of streams) {
-          if (stream.url === newStream.url) {
+          if (stream.id === newStream.id) {
             // console.log(`duplicate: `, newStream);
             return;
           }

@@ -40,7 +40,9 @@ class MyListener(tweepy.streaming.StreamListener):
                     'created_at': status.created_at.isoformat() + 'Z',
                     'location': location,
                     'status': broadcast['status'],
-                    'url': expanded_url
+                    'url': expanded_url,
+                    'id': broadcast['id'],
+                    'profile_image_url': broadcast['profile_image_url']
                 }
                 socketio.emit('new stream', data, namespace='/main')
 
@@ -72,19 +74,24 @@ def get_stream_info(url):
     broadcast_id = urlparse(broadcast_url).path.split('/')[-1]
     try:
         # use info from initial redirect url
-        broadcast = info['BroadcastCache']['broadcasts'][broadcast_id]['broadcast']
+        broadcast = info['BroadcastCache']['broadcasts'][broadcast_id]['broadcast']['data']
     except KeyError:
         # use info from canonical broadcast url
         print('unable to get broadcast from: ' + url)
         if broadcast_id == 'undefined':
-            raise Exception('undefined')
+            raise Exception('undefined broadcast_id')
 
-        api_url = 'https://api.periscope.tv/api/v2/getBroadcastPublic?broadcast_id=' # ex: 1lPKqyeBnZwKb
+        api_url = 'https://proxsee.pscp.tv/api/v2/accessVideoPublic?broadcast_id=' # ex: 1lPKqyeBnZwKb
         api_url += broadcast_id
+        api_url += '&replay_redirect=false'
         print('using public api: ' + api_url)
         response = requests.get(api_url, headers=headers)
-        data = response.json()
-        broadcast = data['broadcast']
+        try:
+            data = response.json()
+            broadcast = data['broadcast']
+        except Exception as e:
+            print('unable to get response from api')
+            raise e
 
     return broadcast
 
