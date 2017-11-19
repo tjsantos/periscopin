@@ -1,12 +1,13 @@
 import json
 import os
 import time
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 from app import socketio
 from pyquery import PyQuery as pq
 import requests
-import reverse_geocode
+import reverse_geocoder
+from iso3166 import countries, countries_by_name
 import tweepy
 
 TWITTER_CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY')
@@ -95,8 +96,9 @@ def get_stream_info(url):
 
     return broadcast
 
-countries = reverse_geocode.GeocodeData().countries
-iso_codes = {country: iso_code for iso_code, country in countries.items()}
+
+# countries = reverse_geocoder.GeocodeData().countries
+# iso_codes = {country: iso_code for iso_code, country in countries.items()}
 def get_location_info(broadcast):
     location = {}
     bc = broadcast
@@ -104,16 +106,20 @@ def get_location_info(broadcast):
         location[key] = bc.get(key, '')
 
     # get location from latlong
-    if bc['ip_lat'] or bc['ip_lng']:
-        rg_loc = reverse_geocode.get((bc['ip_lat'], bc['ip_lng']))
-        location['country'] = location['country'] or rg_loc['country']
-        location['iso_code'] = location['iso_code'] or rg_loc['country_code']
-        location['city'] = location['city'] or rg_loc['city']
-    # interpolate country and iso code data
+    if (bc['ip_lat'] or bc['ip_lng']) and not (location['iso_code'] and location['city']):
+        rg_loc = reverse_geocoder.get((bc['ip_lat'], bc['ip_lng']))
+        # location['country'] = location['country'] or rg_loc['country']
+        location['iso_code'] = location['iso_code'] or rg_loc['cc']
+        location['city'] = location['city'] or rg_loc['name']
+        location['country_state'] = location['country_state'] or rg_loc['admin1']
+        print(('reverse geocoded: '
+               f'{location["city"]}, {location["country_state"]}, {location["iso_code"]}'))
+    # infer country and iso code data
     if not location['country'] and location['iso_code']:
-        location['country'] = countries[location['iso_code']]
+        location['country'] = countries.get(location['iso_code']).name
     elif not location['iso_code'] and location['country']:
-        location['iso_code'] = iso_codes.get(location['country'], '')
+        location['iso_code'] = countries_by_name.get(location['country'], '').alpha2
+        print(f'inferred iso_code for country: {location["country"]}')
 
     return location
 

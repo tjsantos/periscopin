@@ -1,0 +1,27 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+flask = "*"
+eventlet = "*"
+flask-socketio = "*"
+whitenoise = ">=4.0b"
+requests = "*"
+tweepy = "*"
+pyquery = "*"
+reverse-geocoder = "*"
+"iso3166" = "*"
+
+
+[dev-packages]
+
+
+
+[requires]
+
+python_version = "3.6"
