@@ -1,19 +1,15 @@
 import json
-import os
 import time
 from urllib.parse import urlparse
 
-from app import socketio
-from pyquery import PyQuery as pq
 import requests
 import reverse_geocoder
-from iso3166 import countries, countries_by_name
 import tweepy
+from iso3166 import countries, countries_by_name
+from pyquery import PyQuery as pq
 
-TWITTER_CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY')
-TWITTER_CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET')
-TWITTER_OAUTH_TOKEN = os.environ.get('TWITTER_OAUTH_TOKEN')
-TWITTER_OAUTH_SECRET = os.environ.get('TWITTER_OAUTH_SECRET')
+from . import settings, socketio
+
 
 class MyListener(tweepy.streaming.StreamListener):
 
@@ -129,8 +125,8 @@ class StreamManager:
 
     def __init__(self):
         listener = MyListener()
-        auth = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
-        auth.set_access_token(TWITTER_OAUTH_TOKEN, TWITTER_OAUTH_SECRET)
+        auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
+        auth.set_access_token(settings.TWITTER_OAUTH_TOKEN, settings.TWITTER_OAUTH_SECRET)
 
         self.stream = tweepy.Stream(auth, listener)
         self.users = 0
@@ -193,7 +189,7 @@ class StreamManagerMock:
         return lambda *args: None
 
 
-if os.environ.get('DEBUG'):
+if settings.DEBUG:
     stream_manager = StreamManagerMock()
 else:
     stream_manager = StreamManager()

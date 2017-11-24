@@ -1,15 +1,5 @@
-from app import app, socketio
-from app.stream import stream_manager
-from flask import render_template
-
-from threading import Thread
-from datetime import datetime
-import time
-
-# no longer necessary. index served from static folder using `WhiteNoise`
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
+from . import socketio
+from .stream import stream_manager
 
 @socketio.on('connect', namespace='/main')
 def on_connect():
