@@ -1,6 +1,6 @@
 import json
-import time
 from urllib.parse import urlparse
+from threading import Timer
 
 import requests
 import reverse_geocoder
@@ -11,12 +11,12 @@ from pyquery import PyQuery as pq
 from . import settings, socketio
 
 
-class MyListener(tweepy.streaming.StreamListener):
+class MyListener(tweepy.StreamListener):
 
     def on_status(self, status):
         # skip retweets
         if getattr(status, 'retweeted_status', False):
-            #print('skipping retweet by @{}\n'.format(status.author.screen_name))
+            # print('skipping retweet by @{}\n'.format(status.author.screen_name))
             return True
 
         for url in status.entities['urls']:
@@ -53,14 +53,11 @@ class MyListener(tweepy.streaming.StreamListener):
                 # except (UnicodeDecodeError, UnicodeEncodeError) as e:
                 #    import IPython; IPython.embed()
 
-        if time.time() > stream_manager.idle_stop_time:
-            stream_manager.stop_stream()
-
         return True
 
+
 website = 'https://github.com/tjsantos/periscopin'
-user_agent_add = '( {} )'.format(website)
-headers = {'User-Agent': requests.utils.default_user_agent() + ' ' + user_agent_add}
+headers = { 'User-Agent': f'{requests.utils.default_user_agent()} ({website})' }
 def get_stream_info(url):
     # get info from initial periscope redirect url
     response = requests.get(url, headers=headers)
@@ -120,76 +117,45 @@ def get_location_info(broadcast):
     return location
 
 
+auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
+auth.set_access_token(settings.TWITTER_OAUTH_TOKEN, settings.TWITTER_OAUTH_SECRET)
+default_stream = tweepy.Stream(auth, MyListener())
+
 
 class StreamManager:
 
-    def __init__(self):
-        listener = MyListener()
-        auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
-        auth.set_access_token(settings.TWITTER_OAUTH_TOKEN, settings.TWITTER_OAUTH_SECRET)
-
-        self.stream = tweepy.Stream(auth, listener)
+    def __init__(self, stream, idle_time=300):
+        """
+        :param stream: tweepy stream built with custom listener
+        :param idle_time: seconds to wait for more users before disconnecting stream
+        """
+        self.stream = stream
         self.users = 0
-        self.idle_stop_time = float('inf')
-        self.idle_stop_time_delay = 300 # seconds to wait for more users before disconnecting stream
+        self.idle_time = idle_time
+        # always have a timer that can be cancelled
+        self._idle_timer = Timer(self.idle_time, self._stop_stream)
 
-    '''
-    def _stream(self):
-        while self.running:
-            now = datetime.now().isoformat()
-            #print(now)
-            data = {
-                'name': 'name', 'screen_name': 'screen_name', 'created_at': now,
-                'location': {
-                    'city': 'city',
-                    'country': 'country'
-                },
-                'status': 'status',
-            }
-            socketio.emit('new stream', data, namespace='/main')
-            time.sleep(5)
-    '''
-
-    def start_stream(self):
+    def _start_stream(self):
         print('starting stream')
         self.stream.filter(track=['#periscope'], async=True)
-        self.idle_stop_time = float('inf')
-        #self.running = True
-        #thread = Thread(target=self._stream)
-        #thread.start()
 
-    def stop_stream(self):
+    def _stop_stream(self):
         print('stopping stream')
         self.stream.disconnect()
-        #self.running = False
 
     def new_connection(self):
         self.users += 1
-        print('user connected ({})'.format(self.users))
+        print(f'user connected ({self.users})')
+        self._idle_timer.cancel()
         if not self.stream.running:
-            self.start_stream()
-        self.idle_stop_time = float('inf')
+            self._start_stream()
 
     def new_disconnect(self):
         self.users -= 1
-        print('user disconnected ({})'.format(self.users))
+        print(f'user disconnected ({self.users})')
         if self.users == 0:
-            self.idle_stop_time = time.time() + self.idle_stop_time_delay
-            print('disconnecting stream in {} seconds if no '
-                  'users...'.format(self.idle_stop_time_delay))
+            print(f'disconnecting stream in {self.idle_time} seconds if no users...')
+            self._idle_timer.cancel()
+            self._idle_timer = Timer(self.idle_time, self._stop_stream)
+            self._idle_timer.start()
 
-
-class StreamManagerMock:
-    def __init__(self):
-        print('using stream manager mock')
-
-    def __getattr__(self, item):
-        print('mock attr: ' + item)
-        print('using empty function')
-        return lambda *args: None
-
-
-if settings.DEBUG:
-    stream_manager = StreamManagerMock()
-else:
-    stream_manager = StreamManager()
