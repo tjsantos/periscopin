@@ -1,6 +1,7 @@
 import json
 from urllib.parse import urlparse
 from threading import Timer
+import logging
 
 import requests
 import reverse_geocoder
@@ -14,47 +15,63 @@ from . import settings, socketio
 class MyListener(tweepy.StreamListener):
 
     def on_status(self, status):
-        # skip retweets
-        if getattr(status, 'retweeted_status', False):
-            # print('skipping retweet by @{}\n'.format(status.author.screen_name))
-            return True
-
-        for url in status.entities['urls']:
-            expanded_url = url['expanded_url']
-            parsed_url = urlparse(expanded_url)
-            if parsed_url.netloc in ('www.periscope.tv', 'www.pscp.tv'):
-                try:
-                    broadcast = get_stream_info(expanded_url)
-                except Exception as e:
-                    print('Unable to get stream info from @{}:'.format(status.author.screen_name))
-                    print(e)
-                    print('')
-                    continue
-
-                location = get_location_info(broadcast)
-                data = {
-                    'name': status.author.name, 'screen_name': status.author.screen_name,
-                    'created_at': status.created_at.isoformat() + 'Z',
-                    'location': location,
-                    'status': broadcast['status'],
-                    'url': expanded_url,
-                    'id': broadcast['id'],
-                    'profile_image_url': broadcast['profile_image_url']
-                }
-                socketio.emit('new stream', data, namespace='/main')
-
-                # try:
-                #    print((data['name'] + ' @' + data['screen_name']).encode('utf-8'))
-                #    print(u', '.join(
-                #        [location['city'], location['country_state'], location['country']]
-                #    ).encode('utf-8'))
-                #    print(data['status'].encode('utf-8') or u'Untitled')
-                #    print(u'')
-                # except (UnicodeDecodeError, UnicodeEncodeError) as e:
-                #    import IPython; IPython.embed()
-
+        process_status(status)
         return True
 
+    def on_data(self, raw_data):
+        # log incoming twitter data before passing to tweepy's on_data dispatcher
+        logging.info(raw_data)
+        super().on_data(raw_data)
+
+
+def process_status(status):
+    # skip retweets
+    if getattr(status, 'retweeted_status', False):
+        # print('skipping retweet by @{}\n'.format(status.author.screen_name))
+        return
+
+    urls = extract_urls(status)
+
+    for pscp_url in urls:
+        try:
+            broadcast = get_stream_info(pscp_url)
+        except Exception as e:
+            print('Unable to get stream info from @{}:'.format(status.author.screen_name))
+            print(e)
+            print('')
+        else:
+            location = get_location_info(broadcast)
+            data = {
+                'name': status.author.name, 'screen_name': status.author.screen_name,
+                'created_at': status.created_at.isoformat() + 'Z',
+                'location': location,
+                'status': broadcast['status'],
+                'url': pscp_url,
+                'id': broadcast['id'],
+                'profile_image_url': broadcast['profile_image_url']
+            }
+            socketio.emit('new stream', data, namespace='/main')
+
+            # try:
+            #    print((data['name'] + ' @' + data['screen_name']).encode('utf-8'))
+            #    print(u', '.join(
+            #        [location['city'], location['country_state'], location['country']]
+            #    ).encode('utf-8'))
+            #    print(data['status'].encode('utf-8') or u'Untitled')
+            #    print(u'')
+            # except (UnicodeDecodeError, UnicodeEncodeError) as e:
+            #    import IPython; IPython.embed()
+
+
+def extract_urls(status):
+    urls = []
+    for url in status.entities['urls']:
+        expanded_url = url['expanded_url']
+        parsed_url = urlparse(expanded_url)
+        if parsed_url.netloc in ('www.periscope.tv', 'www.pscp.tv'):
+            urls.append(expanded_url)
+
+    return urls
 
 website = 'https://github.com/tjsantos/periscopin'
 headers = { 'User-Agent': f'{requests.utils.default_user_agent()} ({website})' }
