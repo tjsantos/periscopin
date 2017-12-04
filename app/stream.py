@@ -12,16 +12,15 @@ from pyquery import PyQuery as pq
 from . import settings, socketio
 
 
-class MyListener(tweepy.StreamListener):
+def extract_urls(status):
+    urls = []
+    for url in status.entities['urls']:
+        expanded_url = url['expanded_url']
+        parsed_url = urlparse(expanded_url)
+        if parsed_url.netloc in ('www.periscope.tv', 'www.pscp.tv'):
+            urls.append(expanded_url)
 
-    def on_status(self, status):
-        process_status(status)
-        return True
-
-    def on_data(self, raw_data):
-        # log incoming twitter data before passing to tweepy's on_data dispatcher
-        logging.info(raw_data)
-        super().on_data(raw_data)
+    return urls
 
 
 def process_status(status):
@@ -63,15 +62,79 @@ def process_status(status):
             #    import IPython; IPython.embed()
 
 
-def extract_urls(status):
-    urls = []
-    for url in status.entities['urls']:
-        expanded_url = url['expanded_url']
-        parsed_url = urlparse(expanded_url)
-        if parsed_url.netloc in ('www.periscope.tv', 'www.pscp.tv'):
-            urls.append(expanded_url)
+def simply_print(*args, **kwargs):
+    print(f'called `simply_log` with args: {args}, kwargs: {kwargs}')
 
-    return urls
+
+class RepeatTimer:
+    """Timer that repeats itself `interval` seconds /after/ each function call returns."""
+
+    def __init__(self, interval, fn, args=None, kwargs=None):
+        self.cancelled = False
+
+        args = args or ()
+        kwargs = kwargs or {}
+
+        def repeater():
+            if self.cancelled:
+                return
+
+            fn(*args, **kwargs)
+            self.timer = Timer(interval, repeater)
+            self.timer.start()
+
+        self.timer = Timer(interval, repeater)
+
+    def start(self):
+        logging.debug('starting timer')
+        self.timer.start()
+
+    def cancel(self):
+        logging.debug('cancelling timer')
+        # `timer.cancel()` won't cancel properly if within repeater call, so use internal check
+        self.cancelled = True
+
+
+class MockStream:
+    def __init__(self, auth, listener):
+        self.auth = auth  # unused, but match tweepy.Stream constructor
+        self.listener = listener
+
+        self.timer = RepeatTimer(5, self._pass_mock_data)
+
+    def filter(self, track, async):
+        if not async:
+            raise ValueError('async should be true')
+
+        self.timer.start()
+
+    def disconnect(self):
+        self.timer.cancel()
+
+    def _pass_mock_data(self):
+        self.listener.on_data('mock raw data from mock stream')
+
+
+def create_listener(process_status):
+    class MyListener(tweepy.StreamListener):
+
+        def on_status(self, status):
+            process_status(status)
+            return True  # return True to continue listening
+
+        def on_data(self, raw_data):
+            # log incoming twitter data before passing to tweepy's on_data dispatcher
+            logging.info(raw_data)
+            super().on_data(raw_data)
+
+    return MyListener()
+
+
+def create_stream(listener):
+    auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
+    auth.set_access_token(settings.TWITTER_OAUTH_TOKEN, settings.TWITTER_OAUTH_SECRET)
+    return tweepy.Stream(auth, listener)
+
 
 website = 'https://github.com/tjsantos/periscopin'
 headers = { 'User-Agent': f'{requests.utils.default_user_agent()} ({website})' }
@@ -134,11 +197,6 @@ def get_location_info(broadcast):
     return location
 
 
-auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
-auth.set_access_token(settings.TWITTER_OAUTH_TOKEN, settings.TWITTER_OAUTH_SECRET)
-default_stream = tweepy.Stream(auth, MyListener())
-
-
 class StreamManager:
 
     def __init__(self, stream, idle_time=300):
@@ -176,3 +234,15 @@ class StreamManager:
             self._idle_timer = Timer(self.idle_time, self._stop_stream)
             self._idle_timer.start()
 
+
+# config based:
+# capture/log external api input/output - use logging module ?
+# twitter stream - real data OR mock data
+# query periscope - real data OR mock data
+
+# TODO: move mocks into test module?
+
+# hard code for now. real twitter but mock out status processor
+listener = create_listener(simply_print)
+stream = create_stream(listener)
+stream_manager = StreamManager(stream)
