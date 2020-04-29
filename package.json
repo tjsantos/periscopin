@@ -13,7 +13,7 @@
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.30.1",
-    "jquery": "^3.2.1",
+    "jquery": "^3.5.0",
     "popper.js": "^1.12.6",
     "postcss-flexbugs-fixes": "^3.2.0",
     "postcss-loader": "^2.0.8",
